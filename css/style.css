@@ -1,0 +1,37 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.login-container{
+    background-color: white;
+    background-position: center;
+    background-size: 5%;
+    height: 95vh;
+}
+
+.logoff-container{
+    background-image: url('/assets/banco.png');
+    background-position: center;
+    background-size: 5%;
+    height: 100vh;
+}
+
+.shadow-container{
+    box-shadow: 0 0 15px;
+}
+
+a{
+    font-weight: bold;
+}
+
+a:hover {
+    color: #7b9ce4 !important;
+}
+
+.text-glow{
+    color: #fff;
+    text-shadow: 0 0 5px #fff, 0 0 15px #000000;
+    font-weight: bold;
+}
