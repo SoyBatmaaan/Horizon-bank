@@ -1,7 +1,7 @@
 <?php
     include("connect_db.php");
 
-    if(isset($_POST['registrarse'])){// CAMBIAR ESTO
+    if(isset($_POST['registrarse'])){
         if(strlen($_POST['email']) >= 1 && strlen($_POST['contrasena']) >= 1){
             // nombre de variable = post nombre del atributo "name" de la etiqueta
             $email = trim($_POST["email"]);

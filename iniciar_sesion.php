@@ -18,17 +18,18 @@
                 <div class="col-sm-10 col-md-6 col-lg-4 bg-light shadow-container rounded-3 p-4"> 
                     <h2 class="mb-5">Log in</h2>
                     <div class="text-left">
-                        <form action="#" method="post">
+                        <form action="#" method="POST">
                             <input type="email" class="form-control border-dark mb-3" name="email" id="" placeholder="Correo Electronico" required>
                             <input type="password" class="form-control border-dark mb-3" name="contrasena" id="" placeholder="Contraseña" required>
                             <button type="submit" class="btn btn-primary mb-1" name="logearse">INGRESAR</button>
-                            <div class="d-flex mb-4">
+                            
+                        </form>
+                        <div class="d-flex mb-4">
                                 <p class="me-2">No tenes cuenta?</p><a href="registrarse.php">Registrate acá</a>
                             </div>
                             <div class="fs-4 text-center">
                                 <a href="index.php" class="text-dark text-decoration-none">Inicio</a>
                             </div>
-                        </form>
                     </div>
                 </div>
                 <div class="col"></div>

@@ -13,7 +13,6 @@
         $comparar_datos = "SELECT id, email, contrasena, alias, dni FROM `usuarios` WHERE `email` = '$email' AND `contrasena` = '$contrasena'";
         
         $comparar_datos_query = mysqli_query($conexion,$comparar_datos);
-        
         // En el caso de que se haya pasado la validacion, guardamos todos los datos
         // del usuario que inicio sesion en variables $_SESSION[]. y redireccionamos
         // al usuario a la pagina principal.
@@ -24,8 +23,9 @@
             $_SESSION["alias"] = $datos->alias;
             $_SESSION["info"] = $datos->dni;
             
+            $email = $_SESSION["email"];
 
-            header("location: index.php");
+            header("Location: index.php");
         }else{
             // Si la validacion fue incorrecta, mostrara este mensaje de error!
             echo '<b style="color:red;">Usuario o contraseña incorrectos! :(</b>';
