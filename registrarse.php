@@ -21,7 +21,7 @@
                             <div id="emailHelp" class="form-text mb-3">El que usaras para iniciar sesión.</div>
                             <input type="text" class="form-control border-dark mb-3" name="dni" id="" placeholder="Documento" required>
                             <input type="text" class="form-control border-dark mb-3" name="alias" id="" placeholder="Alias (máx. 12 caracteres)." required>
-                            <input type="password" class="form-control border-dark mb-3" name="contrasena" id="" placeholder="Contraseña" required>
+                            <input type="password" class="form-control border-dark mb-3" name="contrasena" id="" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{10,15}$" title="La contraseña debe tener entre 10 y 15 caracteres, incluir al menos una mayúscula, un número y un símbolo." required>
                             <button type="submit" class="btn btn-primary mb-1" name="registrarse">REGISTRARSE</button>
                             <div class="d-flex mb-4">
                                 <p class="me-2">Ya tenes cuenta?</p><a href="iniciar_sesion.php">Ingresa acá</a>

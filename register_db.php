@@ -18,6 +18,7 @@
                 $crear_cajadeahorro = "INSERT INTO cuenta (id_usuario) SELECT id FROM usuarios WHERE email = '$email'";
                 $crear_cajadeahorro_query = mysqli_query($conexion,$crear_cajadeahorro);
                 if($crear_cajadeahorro_query){
+                    
                     header("location:iniciar_sesion.php");
                 }
                 

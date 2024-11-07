@@ -18,7 +18,8 @@
         }
 
         $cajaorigen = $_SESSION["caja"];
-
+        $caja_ultimos_4 = substr($cajaorigen, -4);
+        $caja_censurada = str_repeat("*", 6) . $caja_ultimos_4;
 
         //CODIGO OBTENER SALDO
         $conseguir_saldo = "SELECT saldo FROM cuenta JOIN usuarios ON usuarios.id = cuenta.id_usuario WHERE usuarios.email = '$email'";
@@ -36,11 +37,11 @@
         ?>
         <div class="bg-secondary d-flex text-left align-items-center justify-content-center logoff-container">
             <div class="container border border-dark login-container shadow-container justify-content-center">
-                <div class="row border-bottom border-dark h-10">
+                <div class="row h-10">
                     <div class="col-sm-3 d-flex align-items-center"><h1>Horizon Bank</h1></div>
                     <div class="col-sm-9 d-flex align-items-center justify-content-evenly">
                         <h5>Bienvenido <?php echo $_SESSION["alias"] ?></h5>
-                        <h5>Caja de ahorro: <?php echo $cajaorigen ?></h5>
+                        <h5>Caja de ahorro: <?php echo $caja_censurada ?></h5>
                         <h5>Saldo: $<?php echo $_SESSION["saldo"] ?></h5>
                         <form action="#" method="POST">
                             <input type="submit" class="btn btn-sm btn-outline-secondary text-dark" value="CERRAR SESIÓN" name="deslogearse">
@@ -55,7 +56,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-8 m-3 ">
+                    <div class="col-sm-5 m-3 ">
                         <div class="bg-primary text-light p-3 rounded-4 mb-3">
                             <h3 class="mb-4" >Transferir</h3>
                             <form action="#" method="POST">
@@ -129,8 +130,63 @@
                         ?>
                     </div>
                     </div>
-                    <div class="col-sm-2 border-start border-dark">
-                        <h3>Transacciones</h1>
+                    <div class="col-sm-6  m-3">
+                        <div class="bg-dark text-light p-3 rounded-4 h-100">
+                            <h3 class="mb-4">Transacciones</h1>
+                            <?php
+                                $obtener_transacciones = "SELECT `cajadeahorro`, `caja_destino`, `tipo`, `monto`, `descripcion`, `fecha` 
+                                                            FROM `transacciones` WHERE cajadeahorro = '$cajaorigen' 
+                                                            ORDER BY fecha DESC LIMIT 10
+                                                            ;";
+                                $obtener_transacciones_query = mysqli_query($conexion,$obtener_transacciones);
+
+                                $_SESSION['transacciones'] = []; // ARRAY PARA GUARDAR LAS 10 TRANSACCIONES
+
+                                while ($datos = $obtener_transacciones_query->fetch_object()) {
+                                    $_SESSION['transacciones'][] = [
+                                        'tipo' => $datos->tipo,
+                                        'monto' => $datos->monto,
+                                        'descripcion' => $datos->descripcion,
+                                        'fecha' => $datos->fecha,
+                                        'caja_destino' => $datos->caja_destino
+                                    ];
+                                }
+
+                                if (!empty($_SESSION['transacciones'])) {
+
+                                    if (!empty($_SESSION['transacciones'])) {
+                                        echo '<table class="table table-dark table-striped" >';
+                                        echo '<tr>
+                                                <th>Destino</th>
+                                                <th>Tipo</th>
+                                                <th>Monto</th>
+                                                <th>Descripción</th>
+                                                <th>Fecha</th>
+                                              </tr>';
+                                    
+                                        // Recorrer cada transacción y mostrar sus detalles en una fila de la tabla
+                                        foreach ($_SESSION['transacciones'] as $transaccion) {
+                                            echo '<tr>';
+                                            echo '<td>' . htmlspecialchars($transaccion['caja_destino']) . '</td>';
+                                            echo '<td>' . htmlspecialchars($transaccion['tipo']) . '</td>';
+                                            echo '<td> $' . htmlspecialchars($transaccion['monto']) . '</td>';
+                                            echo '<td>' . htmlspecialchars($transaccion['descripcion']) . '</td>';
+                                            echo '<td>' . htmlspecialchars($transaccion['fecha']) . '</td>';
+                                            echo '</tr>';
+                                        }
+                                    
+                                        echo '</table>';
+                                    } else {
+                                        // Mostrar mensaje si no hay transacciones
+                                        echo '<b style="color:red;">NO HAY TRANSACCIONES PARA MOSTRAR</b>';
+                                    }
+                                } else {
+                                    echo '<b style="color:red;">ERROR AL CARGAR TRANSACCIONES o NO HAY TRANSACCIONES PARA MOSTRAR</b>';
+                                }
+
+                                
+                            ?>
+                            </div>
                     </div>
                 </div>
             </div>
