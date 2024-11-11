@@ -19,10 +19,9 @@
                     <h2 class="mb-5">Log in</h2>
                     <div class="text-left">
                         <form action="#" method="POST">
-                            <input type="email" class="form-control border-dark mb-3" name="email" id="" placeholder="Correo Electronico" required>
-                            <input type="password" class="form-control border-dark mb-3" name="contrasena" id="" placeholder="Contraseña" required>
+                            <input type="email" class="form-control border-dark mb-3" name="email_login" id="" placeholder="Correo Electronico" required>
+                            <input type="password" class="form-control border-dark mb-3" name="contrasena_login" id="" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{10,15}$" title="La contraseña debe tener entre 10 y 15 caracteres, incluir al menos una mayúscula, un número y un símbolo." required>
                             <button type="submit" class="btn btn-primary mb-1" name="logearse">INGRESAR</button>
-                            
                         </form>
                         <div class="d-flex mb-4">
                                 <p class="me-2">No tenes cuenta?</p><a href="registrarse.php">Registrate acá</a>
@@ -30,15 +29,16 @@
                             <div class="fs-4 text-center">
                                 <a href="index.php" class="text-dark text-decoration-none">Inicio</a>
                             </div>
+                            <?php
+                                include("login_db.php");
+                            ?>
                     </div>
                 </div>
                 <div class="col"></div>
             </div>
         </div>
     </div>
-    <?php
-            include("login_db.php");
-    ?>
+    
     
 </body>
 </html>

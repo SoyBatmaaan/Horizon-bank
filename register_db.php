@@ -7,10 +7,11 @@
             $email = trim($_POST["email"]);
             $dni = trim($_POST["dni"]);
             $alias = trim($_POST["alias"]); // CORREGIR LARGO DEL ALIAS, SE REGISTRA CORTADO EN LA BASE DE DATOS, PONERLE LIMITE AL INPU
-            $contrasena = trim($_POST["contrasena"]);
+            $contrasena_register =  trim($_POST["contrasena"]);
 
+            $contrasena_register_hash = md5($contrasena_register);// hasheamos la contraseña antes de guardarla
             // nombre de variable = Query para insertar los datos en la tabla
-            $registrar_datos = "INSERT INTO `usuarios`(`id`, `email`, `dni`, `alias`,`contrasena`) VALUES ('','$email','$dni','$alias','$contrasena')";
+            $registrar_datos = "INSERT INTO `usuarios`(`id`, `email`, `dni`, `alias`,`contrasena`) VALUES ('','$email','$dni','$alias','$contrasena_register_hash')";
             // se ejecuta la query hacia la base de datos
             $registrar_datos_query = mysqli_query($conexion,$registrar_datos);
              

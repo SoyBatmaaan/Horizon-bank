@@ -19,8 +19,8 @@
                         <form action="#" method="post">
                             <input type="email" class="form-control border-dark" name="email" id="" placeholder="Correo Electronico" required>
                             <div id="emailHelp" class="form-text mb-3">El que usaras para iniciar sesión.</div>
-                            <input type="text" class="form-control border-dark mb-3" name="dni" id="" placeholder="Documento" required>
-                            <input type="text" class="form-control border-dark mb-3" name="alias" id="" placeholder="Alias (máx. 12 caracteres)." required>
+                            <input type="text" class="form-control border-dark mb-3" name="dni" id="" placeholder="Documento" maxlength="8" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                            <input type="text" class="form-control border-dark mb-3" name="alias" id="" placeholder="Alias (máx. 12 caracteres)." maxlength="12" required>
                             <input type="password" class="form-control border-dark mb-3" name="contrasena" id="" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{10,15}$" title="La contraseña debe tener entre 10 y 15 caracteres, incluir al menos una mayúscula, un número y un símbolo." required>
                             <button type="submit" class="btn btn-primary mb-1" name="registrarse">REGISTRARSE</button>
                             <div class="d-flex mb-4">

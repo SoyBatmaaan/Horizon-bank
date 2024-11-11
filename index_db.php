@@ -7,7 +7,7 @@
     if(!empty($_SESSION["email"])){
         // CODIGO OBTENER CAJA DE AHORRO
         $email = $_SESSION["email"];
-
+        $max_inactivo = 30;
         $conseguir_cajadeahorro = "SELECT cajadeahorro FROM cuenta JOIN usuarios ON usuarios.id = cuenta.id_usuario WHERE usuarios.email = '$email'";
         $conseguir_cajadeahorro_query = mysqli_query($conexion, query: $conseguir_cajadeahorro); 
         if ($datos = $conseguir_cajadeahorro_query->fetch_object()) {
@@ -32,8 +32,15 @@
         }
         
 
-
-
+        if (isset($_SESSION['last_activity'])) {
+            $tiempo_session = time() - $_SESSION['last_activity'];
+            if ($tiempo_session > $max_inactivo) {
+                session_destroy();
+                header("Location: index.php");
+                exit();
+            }
+        }
+        
         ?>
         <div class="bg-secondary d-flex text-left align-items-center justify-content-center logoff-container">
             <div class="container border border-dark login-container shadow-container justify-content-center">
@@ -192,8 +199,9 @@
             </div>
         </div>
     
-    
+                                
     <?php
+    $_SESSION['last_activity'] = time();
     }else{
         // Caso contrario, si la variable $_SESSSION["user"] esta vacia, quiere decir
         // que no hay sesion iniciada, ejecutando el siguiente ECHO insitando
